@@ -1,4 +1,4 @@
-const isProd = process.env.NODE_ENV === "prod";
+const isProd = process.env.NODE_ENV === "production";
 
 const getEnvName = () => (isProd ? "prod" : "dev");
 
