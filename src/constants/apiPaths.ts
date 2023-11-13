@@ -1,9 +1,26 @@
+const isProd = process.env.NODE_ENV === "production";
+
+const getEnvName = () => (isProd ? "prod" : "dev");
+
+const getEnvUrl = (env: string) => {
+  switch (env) {
+    case "external":
+      return "https://.execute-api.eu-west-1.amazonaws.com/dev";
+    case "dev":
+      return "http://localhost:3000";
+    case "prod":
+      return "https://7etguy1g2b.execute-api.eu-west-1.amazonaws.com/prod";
+    default:
+      return "http://localhost:3000";
+  }
+};
+
 const API_PATHS = {
-  product: "https://.execute-api.eu-west-1.amazonaws.com/dev",
-  order: "https://.execute-api.eu-west-1.amazonaws.com/dev",
-  import: "https://.execute-api.eu-west-1.amazonaws.com/dev",
-  bff: "https://7etguy1g2b.execute-api.eu-west-1.amazonaws.com/prod",
-  cart: "https://.execute-api.eu-west-1.amazonaws.com/dev",
+  product: getEnvUrl("external"),
+  order: getEnvUrl("external"),
+  import: getEnvUrl("external"),
+  bff: getEnvUrl(getEnvName()),
+  cart: getEnvUrl("external"),
 };
 
 export default API_PATHS;
